@@ -14,7 +14,7 @@ test_data$DateTime <- as.POSIXct(paste(test_data$Date, test_data$Time))
 
 png(filename = "plot4.png", width = 480, height = 480, units = "px")
 
-## set up device to give a 2x2 plot matrix:
+## set up graphics device to give a 2x2 plot matrix:
 par(mfrow=c(2,2))
 
 ## plot 1: DateTime vs ylab=Global Active Power
