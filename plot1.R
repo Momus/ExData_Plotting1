@@ -46,7 +46,7 @@ test_data <- subset(read.table(unz("./inst/extdata/household_power_consumption.z
 
 
 
-##Plots we need to make:
+
 ## 1. Global Active Power(title)
 ##  Frequency distribution
 ##  Histogram
@@ -59,22 +59,6 @@ png(filename = "plot1.png")
 hist(test_data$Global_active_power, col="red", xlab = "Global Active Power (kilowats)", main ="Global Active Power")
 dev.off()
 
-
-
-
-
-
-## 2. (No Title)
-## Line
-## x (no label) Date
-## y="Global Active Power (kilowatts)"
-## x scale "Thu Fri Sat"
-## y scale 0--6
-png(filename = "plot2.png")
-plot(test_data$DateTime, test_data$Global_active_power, type = "l", xlab="", ylab="Global Active Power (kilowatts)")
-dev.off()
-
-
 ## 3. (no title)
 ##  Multi-line
 ## x (no label) Date
@@ -82,5 +66,28 @@ dev.off()
 ## color: sub1: black; sub2: red; sub3: blue
 ## x scale "Thu Fri Sat"
 ## y scale 0--30
+png(filename = "plot3.png")
+plot(test_data$DateTime, test_data$Sub_metering_1, type = "l", xlab="",  ylab="Energy sub metering")
+lines(test_data$DateTime, test_data$Sub_metering_2, col="red")
+lines(test_data$DateTime, test_data$Sub_metering_3, col="blue")
+legend("topright", c("Sub_metering_1", "Sub_metering_2", "Sub_metering_3"), col=c("black", "blue","red"), lty = 1)
+dev.off()
 
-## 4. (No title
+## 4. Four plots
+
+
+png(filename = "plot2.png")
+## set up device to give a 2x2 plot matrix:
+par(mfrow=c(2,2))
+## plot 1: DateTime vs ylab=Global Active Power
+plot(test_data$DateTime, test_data$Global_active_power, type="l", xlab="", ylab="Global Active Power")
+##plot 2: DateTime v Voltage
+plot(test_data$DateTime, test_data$Voltage, type="l", xlab="datetime", ylab="Voltage")
+##plot 3: Same as plot3.R
+plot(test_data$DateTime, test_data$Sub_metering_1, type = "l", xlab="",  ylab="Energy sub metering")
+lines(test_data$DateTime, test_data$Sub_metering_2, col="red")
+lines(test_data$DateTime, test_data$Sub_metering_3, col="blue")
+legend("topright", c("Sub_metering_1", "Sub_metering_2", "Sub_metering_3"), col=c("black", "blue","red"), lty = 1)
+##Plot 4: Datetime v Global_reactive_power
+plot(test_data$DateTime, test_data$Global_reactive_power, type="l", xlab="datetime", ylab="Global Reactive Power")
+dev.off()
